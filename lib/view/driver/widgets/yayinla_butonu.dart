@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_otostop/controllers/surucu_ilan_ekleme_yonetimi.dart';
+import 'package:online_otostop/controllers/BaglantiliProviderYonetimi/surucu_ilan_ekleme_yonetimi.dart';
 import 'package:provider/provider.dart';
 import '../../../units/degismeyen_birimler.dart';
 

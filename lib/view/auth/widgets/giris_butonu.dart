@@ -17,7 +17,6 @@ class GirisButonu extends StatelessWidget {
               ? theme.colorScheme.primary
               : theme.colorScheme.secondaryContainer,
         ),
-        //overlayColor: MaterialStateProperty.all(themeColor.primary),
       ),
       onPressed: hesap.getHepsiDolu && hesap.getGirdilerHatasiz
           ? () {

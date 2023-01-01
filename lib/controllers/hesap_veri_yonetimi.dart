@@ -70,6 +70,14 @@ class HesapVeriYonetimi with ChangeNotifier {
         : './lib/images/woman.png';
   }
 
+  void kullaniciGirdileriniSifirla() {
+    for (var girdi in kontrolculer) {
+      if (girdi.keys.first.text.isNotEmpty) {
+        girdi.keys.first.clear();
+      }
+    }
+  }
+
   void bilgiGirdilerikontrolu() {
     // bu fonksiyon herhangi bi durumda girdiler bos ise giris butonunu devre disi birakir.
     if (_kayit) {
@@ -137,6 +145,7 @@ class HesapVeriYonetimi with ChangeNotifier {
             kullanici.sifresi == sifreTextKontrolcusu.text);
     _girisBasarili(context, _geriBildirimMesaji);
     setKullaniciProfil = _simdikiKullanici;
+    kullaniciGirdileriniSifirla();
   }
 
   void kayit(BuildContext context) {
@@ -161,11 +170,18 @@ class HesapVeriYonetimi with ChangeNotifier {
       mail: mailTextKontrolcusu.text,
       sifresi: sifreTextKontrolcusu.text,
       cinsiyet: _cinsiyet,
+      iletisimTel: '',
+      iletisimWeb: '',
+      bio: '',
       telGizli: true,
+      ilanlar: [],
+      yolculuklar: [],
+      yorumlar: [],
     );
     KullaniciListesi.kullaniciListesi.add(getSimdikiKullanici);
     setKullaniciProfil = _simdikiKullanici;
     _girisBasarili(context, _geriBildirimMesaji);
+    kullaniciGirdileriniSifirla();
   }
 
   bool mailMevcutDegil() {

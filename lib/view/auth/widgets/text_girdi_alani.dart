@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:online_otostop/controllers/hesap_veri_yonetimi.dart';
 import 'package:online_otostop/units/degismeyen_birimler.dart';
@@ -7,6 +8,7 @@ class TextGirdiAlani extends StatelessWidget {
   final TextEditingController kontrolcu;
   final bool sifreGoster;
   final Widget? suffixIcon;
+  final List<TextInputFormatter>? inputFormatters;
   final String baslikText;
   final bool errorKontrol;
   final String errorText;
@@ -18,6 +20,7 @@ class TextGirdiAlani extends StatelessWidget {
     required this.baslikText,
     required this.errorKontrol,
     required this.errorText,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -39,6 +42,7 @@ class TextGirdiAlani extends StatelessWidget {
               border: const OutlineInputBorder(),
               labelText: baslikText,
             ),
+            inputFormatters: inputFormatters,
             onChanged: (_) {
               hesap.bilgiGirdilerikontrolu();
               hesap.girdiKontrolu();

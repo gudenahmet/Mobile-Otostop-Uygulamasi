@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:online_otostop/controllers/hesap_veri_yonetimi.dart';
 import 'package:online_otostop/units/degismeyen_birimler.dart';
 import 'package:online_otostop/view/auth/widgets/kayit_mod_degistirme_yazisi.dart';
@@ -38,6 +39,9 @@ class _AuthenticationState extends State<Authentication> {
                       kontrolcu: hesap.isimTextKontrolcusu,
                       sifreGoster: false,
                       baslikText: "Kullanıcı Adı",
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(15),
+                      ],
                       errorKontrol:
                           hesap.kontrolculer[0].values.first == HataTipi.ad,
                       errorText:

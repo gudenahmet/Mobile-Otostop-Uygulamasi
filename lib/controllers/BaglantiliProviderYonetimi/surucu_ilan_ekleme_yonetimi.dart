@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:online_otostop/controllers/BaglantiliProviderYonetimi/abstract_provider_koprusu.dart';
 import 'package:online_otostop/controllers/hesap_veri_yonetimi.dart';
 import 'package:online_otostop/models/surucu_ilan.dart';
 import 'package:provider/provider.dart';
 
-import '../units/degismeyen_birimler.dart';
+import '../../units/degismeyen_birimler.dart';
 
-class SurucuIlanEklemeYonetimi with ChangeNotifier {
+class SurucuIlanEklemeYonetimi with ChangeNotifier implements ProviderKoprusu {
   //TextEditingController
   final Map<String, TextEditingController> kontrolculer = {
     'kalkisYeri': TextEditingController(),
@@ -19,20 +20,25 @@ class SurucuIlanEklemeYonetimi with ChangeNotifier {
     'tarih': TextEditingController(),
   };
   // Degiskenler
+  @override
+  List<String> uyusanKonumListesi = [];
   DateTime _tarih = DateTime.now();
   bool _hepsiDolu = false;
   bool _kalkisYeriSecili = false;
   bool _varisYeriSecili = false;
-  final List<String> uyusanKonumListesi = [];
   List<String> konumlar = DegismeyenBirimler.konumlar;
+  @override
   var kalkisYeriFocus = FocusNode();
+  @override
   var varisYeriFocus = FocusNode();
   // getters
   DateTime get getTarih => _tarih;
   bool get getHepsiDolu => _hepsiDolu;
   bool get getKalkisYeriSecili => _kalkisYeriSecili;
   bool get getVarisYeriSecili => _varisYeriSecili;
+  @override
   TextEditingController get kalkisYeri => kontrolculer['kalkisYeri']!;
+  @override
   TextEditingController get varisYeri => kontrolculer['varisYeri']!;
   TextEditingController get tarih => kontrolculer['tarih']!;
   TextEditingController get koltukSayisi => kontrolculer['koltukSayisi']!;
@@ -45,11 +51,13 @@ class SurucuIlanEklemeYonetimi with ChangeNotifier {
     _tarih = tarih;
   }
 
+  @override
   set setKalkisYeriSecili(bool kosul) {
     _kalkisYeriSecili = kosul;
     notifyListeners();
   }
 
+  @override
   set setVarisYeriSecili(bool kosul) {
     _varisYeriSecili = kosul;
     notifyListeners();
@@ -119,6 +127,7 @@ class SurucuIlanEklemeYonetimi with ChangeNotifier {
         .add(
           SurucuIlan(
             kullaniciAdi: hesap.getSimdikiKullanici.kullaniciAdi,
+            surucuCinsiyet: hesap.getSimdikiKullanici.cinsiyet,
             kalkisYeri: kalkisYeri.text,
             varisYeri: varisYeri.text,
             tarih: getTarih,

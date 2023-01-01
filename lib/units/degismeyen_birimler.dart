@@ -18,7 +18,7 @@ class DegismeyenBirimler {
   static void showSnackbar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+        backgroundColor: Theme.of(context).primaryColor,
         content: Text(
           message,
           textAlign: TextAlign.center,

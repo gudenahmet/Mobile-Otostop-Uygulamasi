@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:online_otostop/controllers/BaglantiliProviderYonetimi/birlestirici_provider.dart';
 import 'package:online_otostop/controllers/hesap_veri_yonetimi.dart';
-import 'package:online_otostop/controllers/musteri_sayfa_yonetimi.dart';
+import 'package:online_otostop/controllers/BaglantiliProviderYonetimi/musteri_sayfa_yonetimi.dart';
 import 'package:online_otostop/controllers/profil_sayfa_yonetimi.dart';
-import 'package:online_otostop/controllers/surucu_ilan_ekleme_yonetimi.dart';
-import 'package:online_otostop/view/customer/ilan_arama_sayfasi.dart';
+import 'package:online_otostop/controllers/BaglantiliProviderYonetimi/surucu_ilan_ekleme_yonetimi.dart';
 import 'package:online_otostop/view/customer/musteri_tercih_sayfasi.dart';
+import 'package:online_otostop/view/customer/ilan_arama_sayfasi.dart';
 import 'package:online_otostop/view/customer/secilen_ilan_sayfasi.dart';
 import 'package:online_otostop/view/driver/ilan_ekleme_sayfasi.dart';
 import 'package:online_otostop/view/ana_sayfa.dart';
@@ -13,6 +14,8 @@ import 'package:provider/provider.dart';
 import 'view/auth/hesap_sayfasi.dart';
 
 enum Cinsiyet { erkek, kadin }
+
+enum Kosul { profil, arama }
 
 void main() {
   runApp(const MyApp());
@@ -28,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SurucuIlanEklemeYonetimi()),
         ChangeNotifierProvider(create: (context) => MusteriSayfaYonetimi()),
         ChangeNotifierProvider(create: (context) => ProfilSayfaYonetimi()),
+        ChangeNotifierProvider(create: (context) => BirlestiriciProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

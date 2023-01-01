@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:online_otostop/units/degismeyen_birimler.dart';
 
-class IlanGirdiAlani extends StatelessWidget {
+class GirdiAlani extends StatelessWidget {
   final String baslikText;
   final TextEditingController kontrolcu;
   final FocusNode? focusNode;
   final String textAlign;
   final TextInputType textInputType;
+  final List<TextInputFormatter>? inputFormatters;
   final double textAlanGenisligi;
-  final double textAlanYuksekligi;
+  final double? textAlanYuksekligi;
   final int maxSatirSayisi;
   final bool readOnly;
   final int? maxKarakterSayisi;
+  final Widget? suffix;
   final VoidCallback? onTap;
   final Function(String value)? onChanged;
-  const IlanGirdiAlani({
+  const GirdiAlani({
     Key? key,
     required this.baslikText,
     required this.kontrolcu,
@@ -23,12 +26,14 @@ class IlanGirdiAlani extends StatelessWidget {
     required this.textAlign,
     required this.textInputType,
     required this.textAlanGenisligi,
-    required this.textAlanYuksekligi,
+    this.textAlanYuksekligi,
     required this.maxSatirSayisi,
     required this.readOnly,
     this.maxKarakterSayisi,
     this.onTap,
     this.onChanged,
+    this.suffix,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -45,18 +50,25 @@ class IlanGirdiAlani extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: DegismeyenBirimler.varsayilanPaddingHepsi / 4,
-                child: Text(
-                  baslikText,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                  ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      baslikText,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                      ),
+                    ),
+                    if (suffix != null) SizedBox(width: textAlanGenisligi / 2),
+                    suffix ?? const SizedBox(),
+                  ],
                 ),
               ),
               Padding(
@@ -71,6 +83,7 @@ class IlanGirdiAlani extends StatelessWidget {
                   readOnly: readOnly,
                   onTap: onTap,
                   onChanged: onChanged,
+                  inputFormatters: inputFormatters,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
                     filled: true,
@@ -80,7 +93,7 @@ class IlanGirdiAlani extends StatelessWidget {
                     ),
                     constraints: BoxConstraints(
                       minHeight: 0,
-                      maxHeight: textAlanYuksekligi,
+                      maxHeight: textAlanYuksekligi ?? double.maxFinite,
                       minWidth: 0,
                       maxWidth: textAlanGenisligi,
                     ),
