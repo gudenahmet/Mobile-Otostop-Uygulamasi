@@ -169,6 +169,18 @@ class MusteriSayfaYonetimi with ChangeNotifier implements ProviderKoprusu {
   // ilan onay sayfasi
   void ilanOnay(BuildContext context, SurucuIlan ilan) {
     final hesap = context.read<HesapVeriYonetimi>();
+    var gecmisIlan = GecmisYolculuklar(
+      kullaniciAdi: ilan.kullaniciAdi,
+      surucuCinsiyet: ilan.surucuCinsiyet,
+      kalkisYeri: ilan.kalkisYeri,
+      varisYeri: ilan.varisYeri,
+      tarih: ilan.tarih,
+      tahminiYolSuresi: ilan.tahminiYolSuresi,
+      koltukSayisi: ilan.koltukSayisi,
+      fiyat: ilan.fiyat,
+      adres: ilan.adres,
+      aciklama: ilan.aciklama,
+    );
     // onaylanan ilani onaylayan kisinin gecmisine ekle.
     KullaniciListesi.kullaniciListesi
         .singleWhere(
@@ -176,20 +188,14 @@ class MusteriSayfaYonetimi with ChangeNotifier implements ProviderKoprusu {
               hesap.getSimdikiKullanici.kullaniciAdi == kullanici.kullaniciAdi,
         )
         .yolculuklar!
-        .add(
-          GecmisYolculuklar(
-            kullaniciAdi: ilan.kullaniciAdi,
-            surucuCinsiyet: ilan.surucuCinsiyet,
-            kalkisYeri: ilan.kalkisYeri,
-            varisYeri: ilan.varisYeri,
-            tarih: ilan.tarih,
-            tahminiYolSuresi: ilan.tahminiYolSuresi,
-            koltukSayisi: ilan.koltukSayisi,
-            fiyat: ilan.fiyat,
-            adres: ilan.adres,
-            aciklama: ilan.aciklama,
-          ),
-        );
+        .add(gecmisIlan);
+    // onaylanan ilani ilan sahibinin gecmisine ekle.
+    KullaniciListesi.kullaniciListesi
+        .singleWhere(
+          (kullanici) => ilan.kullaniciAdi == kullanici.kullaniciAdi,
+        )
+        .yolculuklar!
+        .add(gecmisIlan);
     // onaylanan ilani kaldır.
     KullaniciListesi.kullaniciListesi
         .singleWhere(

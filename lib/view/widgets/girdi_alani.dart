@@ -16,6 +16,7 @@ class GirdiAlani extends StatelessWidget {
   final bool readOnly;
   final int? maxKarakterSayisi;
   final Widget? suffix;
+  final Widget? confirmButton;
   final VoidCallback? onTap;
   final Function(String value)? onChanged;
   const GirdiAlani({
@@ -34,6 +35,7 @@ class GirdiAlani extends StatelessWidget {
     this.onChanged,
     this.suffix,
     this.inputFormatters,
+    this.confirmButton,
   }) : super(key: key);
 
   @override
@@ -98,6 +100,7 @@ class GirdiAlani extends StatelessWidget {
                       maxWidth: textAlanGenisligi,
                     ),
                     border: const OutlineInputBorder(),
+                    suffixIcon: confirmButton,
                   ),
                 ),
               ),

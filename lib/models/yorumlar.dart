@@ -1,7 +1,7 @@
 import 'package:online_otostop/main.dart';
 
 class Yorumlar {
-  final String yorumYapanKisiAdi;
+  String yorumYapanKisiAdi;
   final Cinsiyet yorumYapanKisiCinsiyet;
   final DateTime yorumTarihi;
   final String yorum;

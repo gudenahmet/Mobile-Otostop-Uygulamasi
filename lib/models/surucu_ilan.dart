@@ -1,7 +1,7 @@
 import 'package:online_otostop/main.dart';
 
 class SurucuIlan {
-  final String kullaniciAdi;
+  String kullaniciAdi;
   final Cinsiyet surucuCinsiyet;
   final String kalkisYeri;
   final String varisYeri;

@@ -67,20 +67,39 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
                     ),
                   ),
                   hesapKontrol.kullaniciAyni(context, hesap)
-                      ? GirdiAlani(
-                          baslikText: 'Kullanıcı Adı',
-                          kontrolcu: hesapKontrol.getKullaniciAdi,
-                          textAlign: 'center',
-                          textInputType: TextInputType.name,
-                          textAlanGenisligi: deviceSize.width / 2,
-                          textAlanYuksekligi: 70,
-                          maxSatirSayisi: 1,
-                          maxKarakterSayisi: 15,
-                          readOnly: !hesapKontrol.kullaniciAyni(context, hesap),
-                          onChanged: (_) {
-                            hesap.kullaniciAdi =
-                                hesapKontrol.getKullaniciAdi.text;
-                          },
+                      ? Consumer<ProfilSayfaYonetimi>(
+                          builder: (context, value, _) => GirdiAlani(
+                            baslikText: 'Kullanıcı Adı',
+                            kontrolcu: hesapKontrol.getKullaniciAdi,
+                            textAlign: 'start',
+                            textInputType: TextInputType.name,
+                            textAlanGenisligi: deviceSize.width / 2,
+                            textAlanYuksekligi: 80,
+                            maxSatirSayisi: 1,
+                            maxKarakterSayisi: 15,
+                            readOnly:
+                                !hesapKontrol.kullaniciAyni(context, hesap),
+                            onChanged: (_) {
+                              value.isimGirdileriKontrolu();
+                            },
+                            confirmButton: IconButton(
+                              onPressed: value.getIsimGirdileriDogru
+                                  ? () {
+                                      hesapKontrol.ismiGuncelle(context);
+                                      hesap.kullaniciAdi =
+                                          hesapKontrol.getKullaniciAdi.text;
+                                      DegismeyenBirimler.showSnackbar(
+                                          context, 'İsim güncelleme başarılı!');
+                                    }
+                                  : null,
+                              icon: Icon(
+                                Icons.edit,
+                                color: value.getIsimGirdileriDogru
+                                    ? Colors.black
+                                    : Colors.black.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
                         )
                       : Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
